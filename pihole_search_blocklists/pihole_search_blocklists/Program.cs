@@ -32,6 +32,28 @@ namespace pihole_search_blocklists
             {
                 Console.WriteLine($"{nameof(lines)}.Length is 0");
             }
+
+        private static List<string> MatchingUrls(string[] lines, IConfigurationRoot configurationRoot)
+        {
+            var regex = new Regex(configurationRoot["regex"], RegexOptions.Compiled);
+            var webClient = new WebClient();
+            var result = new List<string>();
+
+            foreach (var line in lines)
+            {
+                if (FileMatches(webClient, regex, line))
+                {
+                    Console.WriteLine($"Match found in file {line}");
+                    result.Add(line);
+                }
+                else
+                {
+                    Console.WriteLine($"No match found in file {line}");
+                }
+            }
+            return result;
+        }
+
         private static bool FileMatches(WebClient webClient, Regex regex, string line)
         {
             try
