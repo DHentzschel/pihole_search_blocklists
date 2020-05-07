@@ -10,7 +10,7 @@ Search your pihole blocklists using a regex! Very useful when a certain url shou
 | -o | outputFile | Output file containing regex matches |
 
 ### Example
-The following example will read the file named input.txt line by line and check if it is in a valid URL format.
+The following example will read the file named input.txt line by line and check if it is in a valid URL format.  
 If yes, the file will be downloaded and searches matches for regex "xn--".  
 All matches will be written to the given output file path.
 
