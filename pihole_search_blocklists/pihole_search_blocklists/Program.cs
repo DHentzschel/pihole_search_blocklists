@@ -39,6 +39,24 @@ namespace pihole_search_blocklists
             }
             return new string[0];
         }
+
+        private static void WriteFile(string filePath, List<string> contents)
+        {
+            try
+            {
+                var stringBuilder = new StringBuilder();
+                foreach (var line in contents)
+                {
+                    stringBuilder.Append(line);
+                    stringBuilder.Append(Environment.NewLine);
+                }
+                Console.WriteLine($"Writing matching urls to file {filePath}");
+                File.WriteAllText(filePath, stringBuilder.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
         }
     }
 }
