@@ -32,6 +32,10 @@ namespace pihole_search_blocklists
             {
                 Console.WriteLine($"{nameof(lines)}.Length is 0");
             }
+            var urls = MatchingUrls(lines, config);
+
+            WriteFile(config["outputPath"], urls);
+        }
 
         private static List<string> MatchingUrls(string[] lines, IConfigurationRoot configurationRoot)
         {
