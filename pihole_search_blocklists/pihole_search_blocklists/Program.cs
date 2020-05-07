@@ -26,6 +26,12 @@ namespace pihole_search_blocklists
             builder.AddCommandLine(args, switchMappings);
 
             var config = builder.Build();
+
+            var lines = ReadFile(config["filePath"]);
+            if (lines.Length == 0)
+            {
+                Console.WriteLine($"{nameof(lines)}.Length is 0");
+            }
         private static string[] ReadFile(string filePath)
         {
             try
