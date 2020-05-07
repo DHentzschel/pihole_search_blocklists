@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -25,6 +26,19 @@ namespace pihole_search_blocklists
             builder.AddCommandLine(args, switchMappings);
 
             var config = builder.Build();
+        private static string[] ReadFile(string filePath)
+        {
+            try
+            {
+                Console.WriteLine($"Reading file {filePath}");
+                return File.ReadAllLines(filePath);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            return new string[0];
+        }
         }
     }
 }
