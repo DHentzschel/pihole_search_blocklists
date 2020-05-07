@@ -74,6 +74,10 @@ namespace pihole_search_blocklists
             return false;
         }
 
+        public static bool IsValidUri(string uri)
+            => Uri.TryCreate(uri, UriKind.Absolute, out Uri returnURL)
+                && (returnURL.Scheme == Uri.UriSchemeHttp || returnURL.Scheme == Uri.UriSchemeHttps);
+
         private static string[] ReadFile(string filePath)
         {
             try
