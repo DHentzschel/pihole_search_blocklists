@@ -64,6 +64,12 @@ namespace pihole_search_blocklists
         {
             try
             {
+                if (!IsValidUri(line))
+                {
+                    Console.Error.WriteLine($"String is not a valid URL: {line}");
+                    return false;
+                }
+
                 var html = webClient.DownloadString(line);
                 return regex.IsMatch(html);
             }
