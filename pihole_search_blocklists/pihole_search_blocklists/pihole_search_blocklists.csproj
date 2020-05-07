@@ -3,6 +3,10 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PackageId>pihole_search_blocklists</PackageId>
+    <Authors>Daniel Hentzschel</Authors>
+    <Description>Search your pihole blocklists using a regex! Very useful when a certain url should be removed from the blocklists.</Description>
+    <Copyright>Daniel Hentzschel</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
