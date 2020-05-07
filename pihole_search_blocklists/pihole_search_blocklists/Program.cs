@@ -32,6 +32,20 @@ namespace pihole_search_blocklists
             {
                 Console.WriteLine($"{nameof(lines)}.Length is 0");
             }
+        private static bool FileMatches(WebClient webClient, Regex regex, string line)
+        {
+            try
+            {
+                var html = webClient.DownloadString(line);
+                return regex.IsMatch(html);
+            }
+            catch (WebException e)
+            {
+                Console.Error.WriteLine("An exception occurred: " + e.Message + $"{Environment.NewLine}on URL: {line}");
+            }
+            return false;
+        }
+
         private static string[] ReadFile(string filePath)
         {
             try
