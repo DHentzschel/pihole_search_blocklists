@@ -64,7 +64,7 @@ namespace pihole_search_blocklists
         {
             try
             {
-                if (!IsValidUri(line))
+                if (!IsValidUrl(line))
                 {
                     Console.Error.WriteLine($"String is not a valid URL: {line}");
                     return false;
@@ -80,8 +80,8 @@ namespace pihole_search_blocklists
             return false;
         }
 
-        public static bool IsValidUri(string uri)
-            => Uri.TryCreate(uri, UriKind.Absolute, out Uri returnURL)
+        public static bool IsValidUrl(string url)
+            => Uri.TryCreate(url, UriKind.Absolute, out Uri returnURL)
                 && (returnURL.Scheme == Uri.UriSchemeHttp || returnURL.Scheme == Uri.UriSchemeHttps);
 
         private static string[] ReadFile(string filePath)
