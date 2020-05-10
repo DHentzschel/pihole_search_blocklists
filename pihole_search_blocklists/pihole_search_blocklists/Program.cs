@@ -70,14 +70,15 @@ namespace pihole_search_blocklists
 
             foreach (var line in lines)
             {
-                if (FileMatches(webClient, regex, line))
+                var lineTrimmed = line.Trim();
+                if (FileMatches(webClient, regex, lineTrimmed))
                 {
-                    Console.WriteLine($"Match found in file {line}");
-                    result.Add(line);
+                    Console.WriteLine($"Match found in file {lineTrimmed}");
+                    result.Add(lineTrimmed);
                 }
                 else
                 {
-                    Console.WriteLine($"No match found in file {line}");
+                    Console.WriteLine($"No match found in file {lineTrimmed}");
                 }
             }
             return result;
