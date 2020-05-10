@@ -39,27 +39,6 @@ namespace pihole_search_blocklists
             WriteFile(config["outputPath"], urls);
         }
 
-        private static List<string> MatchingUrls(string[] lines, IConfigurationRoot configurationRoot)
-        {
-            var regex = new Regex(configurationRoot["regex"], RegexOptions.Compiled);
-            var webClient = new WebClient();
-            var result = new List<string>();
-
-            foreach (var line in lines)
-            {
-                if (FileMatches(webClient, regex, line))
-                {
-                    Console.WriteLine($"Match found in file {line}");
-                    result.Add(line);
-                }
-                else
-                {
-                    Console.WriteLine($"No match found in file {line}");
-                }
-            }
-            return result;
-        }
-
         private static bool FileMatches(WebClient webClient, Regex regex, string line)
         {
             try
@@ -80,9 +59,29 @@ namespace pihole_search_blocklists
             return false;
         }
 
-        public static bool IsValidUrl(string url)
-            => Uri.TryCreate(url, UriKind.Absolute, out Uri returnURL)
+        public static bool IsValidUrl(string url) => Uri.TryCreate(url, UriKind.Absolute, out Uri returnURL)
                 && (returnURL.Scheme == Uri.UriSchemeHttp || returnURL.Scheme == Uri.UriSchemeHttps);
+
+        private static List<string> MatchingUrls(string[] lines, IConfigurationRoot configurationRoot)
+        {
+            var regex = new Regex(configurationRoot["regex"], RegexOptions.Compiled);
+            var webClient = new WebClient();
+            var result = new List<string>();
+
+            foreach (var line in lines)
+            {
+                if (FileMatches(webClient, regex, line))
+                {
+                    Console.WriteLine($"Match found in file {line}");
+                    result.Add(line);
+                }
+                else
+                {
+                    Console.WriteLine($"No match found in file {line}");
+                }
+            }
+            return result;
+        }
 
         private static string[] ReadFile(string filePath)
         {
