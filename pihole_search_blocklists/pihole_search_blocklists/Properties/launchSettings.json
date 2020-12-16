@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "pihole_search_blocklists": {
+      "commandName": "Project",
+      "commandLineArgs": "-f C:\\Users\\dhent\\Desktop\\input.txt -o C:\\Users\\dhent\\Desktop\\output.txt -r c[a-zA-Z]passion.net"
+    }
+  }
+}
